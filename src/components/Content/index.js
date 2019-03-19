@@ -1,11 +1,14 @@
 import React from 'react';
-import Sign from './Sign';
-import Hello from './style.js';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Menu from './Menu';
+import Friends from '../Friends';
 
 const Content = () => (
-  <Hello>
-    <Sign name="signin" />
-    <Sign name="signup" />
-  </Hello>
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" render={() => (<Menu />)} />
+      <Route exact path="/friends" render={() => (<Friends />)} />
+    </Switch>
+  </BrowserRouter>
 );
 export default Content;

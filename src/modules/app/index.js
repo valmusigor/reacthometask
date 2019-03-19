@@ -1,9 +1,10 @@
 import React from 'react';
 import '../style.css';
-import Header from '../../components/Content';
-import Content from '../../components/Header';
+import Content from '../../components/Content';
+import Header from '../../components/Header';
 import Slayder from '../../components/Slayder';
 import Footer from '../../components/Footer';
+
 
 const App = () => (
   <div className="App">
@@ -12,6 +13,7 @@ const App = () => (
     <Slayder />
     <Footer />
   </div>
+
 );
 
 export default App;

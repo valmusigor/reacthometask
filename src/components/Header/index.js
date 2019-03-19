@@ -3,7 +3,6 @@ import Logo from './Logo';
 import Navbar from './Navbar';
 import Wrapper from './style';
 
-
 const Header = () => (
   <Wrapper>
     <Logo />
