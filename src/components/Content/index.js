@@ -6,7 +6,8 @@ import Friends from '../Friends';
 class Content extends Component{ 
   constructor(props){
     super(props);
-    this.state={auth:localStorage.getItem('auth')};
+    this.state={auth:localStorage.getItem('auth')||'no'};
+    console.log(this.state.auth);
   }
   //==componentDidMount(){
    //this.setState({auth:localStorage.getItem('auth')});
