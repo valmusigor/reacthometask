@@ -1,28 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Menu from './Menu';
+import AuthOk from './AuthOk';
 import Friends from '../Friends';
+import PrivateRoute from './PrivateRoute';
 
-class Content extends Component{ 
-  constructor(props){
-    super(props);
-    this.state={auth:localStorage.getItem('auth')||'no'};
-    console.log(this.state.auth);
-  }
-  //==componentDidMount(){
-   //this.setState({auth:localStorage.getItem('auth')});
-   //console.log(this.setState.auth);
- // }
-  render(){ 
-    console.log(this.state.auth);
-    return(
+const Content = () =>(
   <BrowserRouter>
     <Switch>
-     <Route exact path="/" render={() => ((this.state.auth=='no')? <Menu /> :<Friends />)} />)}
-      <Route exact path="/friends" render={() => (<Friends />)}/>
+      <Route
+        exact
+        path="/"
+        component={typeof (localStorage.getItem('auth')) === 'undefined' ? Menu
+          : localStorage.getItem('auth') === 'false' ? Menu : AuthOk}
+      />
+      <Route exact path="/login" component={localStorage.getItem('auth') === 'false' ? Menu : AuthOk} />
+      <PrivateRoute exact path="/friends" component={AuthOk} />
     </Switch>
   </BrowserRouter>
 );
-}
-}
+
 export default Content;
