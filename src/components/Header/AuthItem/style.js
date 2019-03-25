@@ -6,6 +6,7 @@ justify-self:end;
 display:flex;
 align-self: center;
 margin-right:10px;
+position:relative;
 `;
 const Item = styled.div`
 align-self: center;
@@ -22,6 +23,16 @@ border-radius: 5px;
 :hover{
     background:#0100ff;
     box-shadow: 0px 1px 6px 4px #6c757d;
+    }
+    :after {
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: .255em;
+        content: "";
+        border-top: .3em solid;
+        border-right: .3em solid transparent;
+        border-bottom: 0;
+        border-left: .3em solid transparent;
     }
 `;
 
