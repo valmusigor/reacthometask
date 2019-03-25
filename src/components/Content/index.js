@@ -15,7 +15,7 @@ const Content = () =>(
           : localStorage.getItem('auth') === 'false' ? Menu : AuthOk}
       />
       <Route exact path="/login" component={localStorage.getItem('auth') === 'false' ? Menu : AuthOk} />
-      <PrivateRoute exact path="/friends" component={AuthOk} />
+      <PrivateRoute exact path="/auth" component={AuthOk} />
     </Switch>
   </BrowserRouter>
 );

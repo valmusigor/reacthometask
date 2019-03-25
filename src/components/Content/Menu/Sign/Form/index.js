@@ -27,7 +27,7 @@ class Form extends Component {
 
   render() {
     return (
-      <form action="/friends" method="GET">
+      <form action="/auth" method="GET">
         <Wrapper>
           <label htmlFor="login">login</label>
           <Field
