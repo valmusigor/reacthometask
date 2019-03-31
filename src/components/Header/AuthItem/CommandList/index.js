@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import  * as s from './style';
+import * as s from './style';
 
 
 class CommandList extends Component {
-    constructor(props){
-     super(props);
-     this.handleClick=this.handleClick.bind(this);
-     
- }
- handleClick() {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
     localStorage.setItem('auth', 'false');
   }
 
