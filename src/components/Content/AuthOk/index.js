@@ -7,7 +7,7 @@ const API_KEY='AIzaSyDrhsp9XFgs61tLZx9SNIGl7FEcdGSWBRE';
 class AuthOk extends Component {
 constructor(props){
   super(props);
-  this.state = { search: '',videos: [] };
+  this.state = { search: 'hello',videos: [] };
   this.videoSearch(this.state.search);
 }
  changeSearch = (event) => {
@@ -21,8 +21,7 @@ constructor(props){
     type:'video'
   },  (errors, videos) => {
     this.setState({
-      videos: videos,
-      selectedVideo: videos[0]
+      videos: videos
     });});
  }
   handleClick = () => {

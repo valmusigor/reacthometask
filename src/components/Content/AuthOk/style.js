@@ -10,10 +10,5 @@ const Player = styled.div`
 const List = styled.div`
 
 `;
-const Field = styled.div`
 
-`;
-const Btn = styled.button`
-
-`;
-export { Btn, Wrapper, Player, List, Container, Field };
+export { Wrapper, Player, List, Container };

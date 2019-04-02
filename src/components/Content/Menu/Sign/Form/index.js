@@ -4,7 +4,7 @@ import { Wrapper, Field, Btn } from './style';
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { inputLogin: '', inputPass: '' };
+    this.state = { inputLogin: '', inputPass: '', status: 'disabled' };
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePass = this.handlePass.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -22,7 +22,15 @@ class Form extends Component {
   }
 
   handlePass(event) {
-    this.setState({ inputPass: event.target.value });
+   this.setState({ inputPass: event.target.value });
+   let str = event.target.value.trim();
+    if (str.length < 4) 
+    {
+      this.refs.btn.setAttribute("disabled", "disabled");
+    }
+    else {
+      this.refs.btn.removeAttribute('disabled');
+    }
   }
 
   render() {
@@ -47,7 +55,7 @@ class Form extends Component {
             id="pass1"
             placeholder="enter password"
             value={this.state.inputPass}
-            onChange={this.handlePass}
+            onInput={this.handlePass}
           />
         </Wrapper>
         {this.props.name === 'signup' && (
@@ -57,7 +65,7 @@ class Form extends Component {
         </Wrapper>
         )}
         <Wrapper>
-          <Btn onClick={this.handleClick}>
+          <Btn disabled ref="btn" onClick={this.handleClick}>
             {(this.props.name === 'signin') ? 'Sign in' : 'Sign up'}
           </Btn>
         </Wrapper>
