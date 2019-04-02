@@ -4,7 +4,7 @@ import { Wrapper, Field, Btn } from './style';
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { inputLogin: '', inputPass: '', status: 'disabled' };
+    this.state = { inputLogin: '', inputPass: '', statusLogin: 'false' , statusPassword: 'false', disabled: true };
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePass = this.handlePass.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -12,13 +12,37 @@ class Form extends Component {
   }
 
   handleClick() {
-    if (this.state.inputLogin === 'admin' && this.state.inputPass === '1234') {
+   console.log('обработчик');
+    if (this.state.inputLogin == 'admin@' && this.state.inputPass === '1234') {
       localStorage.setItem('auth', 'true');
+    
     } else { localStorage.setItem('auth', 'false'); }
+  
   }
 
   handleLogin(event) {
     this.setState({ inputLogin: event.target.value });
+    let str = event.target.value.trim();
+    let result=str.match(/@/gi);
+    console.log('tut');
+   if (result == null )
+    {
+      this.setState({disabled:true});
+      console.log('1');
+    }
+    else if (result.length >1){
+      this.setState({disabled:true});
+    console.log('2' );
+    }
+    else if(result.length == 1 && this.state.statusPassword=='true') {
+      this.setState({disabled:false});
+      console.log('3' );
+    }
+    else
+    {
+    this.setState({statusLogin:'true'});
+    console.log(result.length );
+    }
   }
 
   handlePass(event) {
@@ -26,25 +50,27 @@ class Form extends Component {
    let str = event.target.value.trim();
     if (str.length < 4) 
     {
-      this.refs.btn.setAttribute("disabled", "disabled");
+      this.setState({disabled:true});
     }
-    else {
-      this.refs.btn.removeAttribute('disabled');
+    else if(this.state.statusLogin=='true') {
+      this.setState({disabled:true}); 
     }
+    else 
+    this.setState({statusPassword:'true'});
   }
 
   render() {
     return (
       <form action="/auth" method="GET">
         <Wrapper>
-          <label htmlFor="login">login</label>
+          <label htmlFor="login">email</label>
           <Field
             type="text"
             name="login"
             id="login"
-            placeholder="enter login"
+            placeholder="enter email"
             value={this.state.inputLogin}
-            onChange={this.handleLogin}
+            onInput={this.handleLogin}
           />
         </Wrapper>
         <Wrapper>
@@ -65,7 +91,7 @@ class Form extends Component {
         </Wrapper>
         )}
         <Wrapper>
-          <Btn disabled ref="btn" onClick={this.handleClick}>
+          <Btn {...(this.state.disabled)?{disabled:true}:{}} onClick={this.handleClick}>
             {(this.props.name === 'signin') ? 'Sign in' : 'Sign up'}
           </Btn>
         </Wrapper>
