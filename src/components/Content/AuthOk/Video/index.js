@@ -22,11 +22,12 @@ onPlay=(event)=>{
     console.log('error');
   }
   else{
-    console.log(this.props.sourceImage.items);
+    console.log(this.props.sourceImage);
    // this.setState({play:this.props.sourceImage.items[0].id.videoId});
     this.props.sourceImage.items.forEach(function(elem){
         mas.push({src:elem.snippet.thumbnails.default.url,
-        id:elem.id.videoId, title:elem.snippet.title
+        id:elem.id.videoId, title:elem.snippet.title,
+       // viewCount:elem.statistics.viewCount
         });
     });
     console.log(mas);
@@ -42,14 +43,15 @@ onPlay=(event)=>{
         onReady={this.props.readyPlayer}
       />
     </s.Player>
-    <s.List >
+    <s.List onScroll={this.props.scrollList} >
     {mas.map(elem => 
       <s.Item  onClick={this.onPlay}>
         <div>
         <img src={elem.src} id={elem.id}/>
         </div>
         <div>
-          hellllos  {elem.title}
+         {elem.title}
+        
         </div>
       </s.Item>)}
       </s.List>

@@ -7,7 +7,7 @@ const API_KEY='AIzaSyDrhsp9XFgs61tLZx9SNIGl7FEcdGSWBRE';
 class AuthOk extends Component {
 constructor(props){
   super(props);
-  this.state = { search: 'hello',videos: [] };
+  this.state = { search: 'hello',videos: [], maxResult: 10 };
   this.videoSearch(this.state.search);
 }
  changeSearch = (event) => {
@@ -16,6 +16,7 @@ constructor(props){
  videoSearch(query)
  {
   searchYoutube(API_KEY, {
+    maxResults: this.state.maxResult,
     q:query,
     part:'snippet',
     type:'video'
@@ -27,13 +28,18 @@ constructor(props){
   handleClick = () => {
     this.videoSearch(this.state.search);
   }
-
+  handleScroll = (event) =>{
+    if((event.target.scrollHeight-event.target.scrollTop)==event.target.clientHeight)
+    {this.setState({maxResult:this.state.maxResult+10});
+    this.videoSearch(this.state.search)
+  }
+  }
 
   render(){
     return(
   <s.Container>
     <SearchField search={this.state.search} clickSearch={this.handleClick} changeSearch={this.changeSearch}/>
-    <Video readyPlayer={this._onReady} sourceImage={this.state.videos} />
+    <Video readyPlayer={this._onReady} sourceImage={this.state.videos} scrollList={this.handleScroll}/>
   </s.Container>
   );
   }

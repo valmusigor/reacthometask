@@ -12,11 +12,16 @@ flex-grow:1;
 `;
 const List = styled.div`
 max-width:40%;
+background:white;
+margin-top:-15px
+overflow-y: scroll;
+    height: 100vh;
 `;
 const Item = styled.div`
 display:flex;
 color:black;
-background:white;
+padding:20px;
+border-bottom:1px solid grey;
 `;
 
 export { Wrapper, Player, List, Item };

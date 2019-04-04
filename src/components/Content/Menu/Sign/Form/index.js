@@ -13,7 +13,7 @@ class Form extends Component {
 
   handleClick() {
    console.log('обработчик');
-    if (this.state.inputLogin == 'admin@' && this.state.inputPass === '1234') {
+    if (this.state.inputLogin == 'x-ray-moby@mail.ru' && this.state.inputPass === '1234') {
       localStorage.setItem('auth', 'true');
     
     } else { localStorage.setItem('auth', 'false'); }
@@ -25,12 +25,14 @@ class Form extends Component {
     let str = event.target.value.trim();
     let result=str.match(/@/gi);
     console.log('tut');
-   if (result == null )
+   if (result === null )
     {
       this.setState({disabled:true});
-      console.log('1');
+      this.setState({statusLogin:'false'});
+      console.log(`Результат:${result}`);
+
     }
-    else if (result.length >1){
+    else if (result.length >1 ){
       this.setState({disabled:true});
     console.log('2' );
     }
@@ -41,7 +43,7 @@ class Form extends Component {
     else
     {
     this.setState({statusLogin:'true'});
-    console.log(result.length );
+    //console.log(result.length );
     }
   }
 
@@ -51,9 +53,10 @@ class Form extends Component {
     if (str.length < 4) 
     {
       this.setState({disabled:true});
+      this.setState({statusPassword:'false'});
     }
     else if(this.state.statusLogin=='true') {
-      this.setState({disabled:true}); 
+      this.setState({disabled:false}); 
     }
     else 
     this.setState({statusPassword:'true'});
