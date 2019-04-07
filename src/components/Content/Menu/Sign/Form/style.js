@@ -28,5 +28,11 @@ border-radius: 5px;
     box-shadow: 0px 1px 6px 4px #6c757d;
     }
 `;
+const Error = styled.span`
+display:${props => props.display};
+color:red;
+`;
 
-export {Wrapper, Field, Btn} ;
+export {
+  Wrapper, Field, Btn, Error,
+};

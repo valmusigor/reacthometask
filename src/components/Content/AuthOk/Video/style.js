@@ -23,5 +23,6 @@ color:black;
 padding:20px;
 border-bottom:1px solid grey;
 `;
-
-export { Wrapper, Player, List, Item };
+const ImageLoading=styled.div`
+`;
+export { Wrapper, Player, List, Item, ImageLoading };

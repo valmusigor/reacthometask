@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import opts from './config';
 import * as s from './style';
-
+import loading from './Item/load.gif';
 
 class Video extends Component {
  constructor(props){
@@ -43,6 +43,9 @@ onPlay=(event)=>{
         onReady={this.props.readyPlayer}
       />
     </s.Player>
+    <s.ImageLoading>
+        <img width="120px" height="90px" src={loading} />
+      </s.ImageLoading>
     <s.List onScroll={this.props.scrollList} >
     {mas.map(elem => 
       <s.Item  onClick={this.onPlay}>
@@ -54,6 +57,7 @@ onPlay=(event)=>{
         
         </div>
       </s.Item>)}
+     
       </s.List>
   </s.Wrapper>);
  }

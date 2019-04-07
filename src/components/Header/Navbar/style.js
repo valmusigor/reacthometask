@@ -60,6 +60,9 @@ align-self: center;
     display:block;
     margin-right:10px;
 }
-
 `;
-export { Wrapper, Item, Linki, List, BtnMenu };
+const Elem = styled.span`
+vertical-align:end;
+color:red;
+`;
+export { Wrapper, Item, Linki, List, BtnMenu, Elem };
