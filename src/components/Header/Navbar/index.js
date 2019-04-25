@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import * as s from './style';
 import imageButton from './images/button_menu.png';
-const items = [
-  { path: '/', name: 'Главная' },
-  { path: '#', name: 'Новости' },
-  { path: '/friends', name: 'Лучшие друзья' },
-  { path: '#', name: 'Контакты' },
-];
-const menuItems = items.map(item => <s.Item><s.Linki to={item.path} exact>{item.name}</s.Linki></s.Item>);
+
+
 
 class Navbar extends Component{
   
@@ -37,14 +32,13 @@ class Navbar extends Component{
     console.log(data);
     }
       ).catch((error)=>{console.log(error);});
-
   }
   render(){
   return (
     <BrowserRouter>
       <s.Wrapper>
         <s.List visibly={this.state.dispay}>
-          {menuItems}
+        {this.props.itemsHeader.map(item => <s.Item><s.Linki to={item.path} exact>{item.name}</s.Linki></s.Item>)}
           <s.Item>EURO {this.state.soldEuro}/{this.state.buyEuro}</s.Item>
           <s.Item>USD {this.state.soldUsd}/{this.state.buyUsd}</s.Item>
           <s.Item>RUB {this.state.soldRub}/{this.state.buyRub}</s.Item>

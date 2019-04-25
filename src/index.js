@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './modules/app';
 import * as serviceWorker from './serviceWorker';
+import state, { observer, formWorker } from './redux/state';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
+const renderEntireTree = () => {
+  ReactDOM.render(<App appState={state} formWorker={formWorker} />, document.getElementById('root'));
+};
+renderEntireTree();
+observer(renderEntireTree);
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
