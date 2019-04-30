@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Wrapper, Field, Btn, Error,
 } from './style';
+import store from '../../../../../redux/state';
 
 const Form = ({
   name,
@@ -24,18 +25,18 @@ const Form = ({
 }) => {
   const handleClick = (event) => {
     event.preventDefault();
-    clickAuth((event.target.id == 'btnIn') ? 'signin' : 'signup');
+    clickAuth.call(store, (event.target.id == 'btnIn') ? 'signin' : 'signup');
   };
 
   const handleLogin = (event) => {
-    inputLogin(event.target.value, (event.target.id == 'emailIn') ? 'signin' : 'signup');
+    inputLogin.call(store, event.target.value, (event.target.id == 'emailIn') ? 'signin' : 'signup');
   };
 
   const handlePass = (event) => {
-    inputPass(event.target.value, (event.target.id == 'passIn') ? 'signin' : 'signup');
+    inputPass.call(store, event.target.value, (event.target.id == 'passIn') ? 'signin' : 'signup');
   };
   const handlePassRep = (event) => {
-    inputPassRep(event.target.value);
+    inputPassRep.call(store, event.target.value);
   };
   return (
     <form action="/auth" method="GET">
