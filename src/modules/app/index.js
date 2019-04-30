@@ -17,16 +17,16 @@ const App = props => (
           exact
           path="/"
           render={() => ((typeof (localStorage.getItem('auth')) === 'undefined')
-            ? <Menu stateSign={props.appState.signIn} formWorker={props.formWorker} />
+            ? <Menu stateSign={props.appState} formWorker={props.formWorker} />
             : (localStorage.getItem('auth') === 'false')
-              ? <Menu stateSign={props.appState.signIn} formWorker={props.formWorker} />
+              ? <Menu stateSign={props.appState} formWorker={props.formWorker} />
               : <AuthOk />)}
         />
         <Route
           exact
           path="/login"
           render={() => (localStorage.getItem('auth') === 'false'
-            ? <Menu stateSign={props.appState.signIn} formWorker={props.formWorker} />
+            ? <Menu stateSign={props.appState} formWorker={props.formWorker} />
             : <AuthOk />)}
         />
         <PrivateRoute exact path="/auth" component={AuthOk} />

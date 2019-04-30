@@ -9,27 +9,33 @@ const Form = ({
   formWorker: {
     inputLogin,
     inputPass,
+    inputPassRep,
     clickAuth,
   },
   stateSign: {
     valueLogin,
     valuePass,
+    valuePassRep,
     disabled,
     displayErrorEmail,
     displayErrorPass,
+    displayErrorPassRep,
   },
 }) => {
   const handleClick = (event) => {
     event.preventDefault();
-    clickAuth();
+    clickAuth((event.target.id == 'btnIn') ? 'signin' : 'signup');
   };
 
   const handleLogin = (event) => {
-    inputLogin(event.target.value);
+    inputLogin(event.target.value, (event.target.id == 'emailIn') ? 'signin' : 'signup');
   };
 
   const handlePass = (event) => {
-    inputPass(event.target.value);
+    inputPass(event.target.value, (event.target.id == 'passIn') ? 'signin' : 'signup');
+  };
+  const handlePassRep = (event) => {
+    inputPassRep(event.target.value);
   };
   return (
     <form action="/auth" method="GET">
@@ -37,8 +43,8 @@ const Form = ({
         <label htmlFor="login">email</label>
         <Field
           type="text"
-          name="login"
-          id="login"
+          name={(name === 'signin') ? 'emailIn' : 'emailUp'}
+          id={(name === 'signin') ? 'emailIn' : 'emailUp'}
           placeholder="enter email"
           value={valueLogin}
           onInput={handleLogin}
@@ -49,8 +55,8 @@ const Form = ({
         <label htmlFor="pass1">password</label>
         <Field
           type="password"
-          name="pass1"
-          id="pass1"
+          name={(name === 'signin') ? 'passIn' : 'passUp'}
+          id={(name === 'signin') ? 'passIn' : 'passUp'}
           placeholder="enter password"
           value={valuePass}
           onInput={handlePass}
@@ -60,11 +66,23 @@ const Form = ({
       {name === 'signup' && (
         <Wrapper>
           <label htmlFor="pass2">repeat password</label>
-          <Field type="password" name="pass2" id="pass2" placeholder="repeat password" />
+          <Field
+            type="password"
+            name="passUpRep"
+            id="passUpRep"
+            placeholder="repeat password"
+            value={valuePassRep}
+            onInput={handlePassRep}
+          />
+          <Error display={displayErrorPassRep}>Введенные пароли не совпадают</Error>
         </Wrapper>
       )}
       <Wrapper>
-        <Btn {...(disabled) ? { disabled: true } : {}} onClick={handleClick}>
+        <Btn
+          {...(disabled) ? { disabled: true } : {}}
+          onClick={handleClick}
+          id={(name === 'signin') ? 'btnIn' : 'btnUp'}
+        >
           {(name === 'signin') ? 'Sign in' : 'Sign up'}
         </Btn>
       </Wrapper>
@@ -74,17 +92,22 @@ const Form = ({
 };
 Form.propTypes = {
   name: PropTypes.string.isRequired,
-  formWorker: {
+  formWorker: PropTypes.shape({
     inputLogin: PropTypes.func.isRequired,
     inputPass: PropTypes.func.isRequired,
     clickAuth: PropTypes.func.isRequired,
-  },
+  }),
+  
+};
+Form.defaultProps = {
   stateSign: {
-    valueLogin: PropTypes.string.isRequired,
-    valuePass: PropTypes.string.isRequired,
-    disabled: PropTypes.bool.isRequired,
-    displayErrorEmail: PropTypes.string.isRequired,
-    displayErrorPass: PropTypes.string.isRequired,
-  }
+    valueLogin: '',
+    valuePass: '',
+    valuePassRep: '',
+    disabled: true,
+    displayErrorEmail: 'none',
+    displayErrorPass: 'none',
+    displayErrorPassRep: 'none',
+  },
 };
 export default Form;
