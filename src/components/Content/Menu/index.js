@@ -4,8 +4,18 @@ import Wrapper from './style';
 
 const Menu = props => (
   <Wrapper>
-    <Sign name="signin" stateSign={props.stateSign.signIn} formWorker={props.formWorker} />
-    <Sign name="signup" stateSign={props.stateSign.signUp} formWorker={props.formWorker}/>
+    {props.nameItem.map(item => (
+      <Sign
+        key={item.id}
+        name={item}
+        stateSign={(item.label === 'signin') ? props.stateSignIn : props.stateSignUp}
+        clickAuth={props.clickAuth}
+        inputLogin={props.inputLogin}
+        inputPass={props.inputPass}
+        inputPassRep={props.inputPassRep}
+      />
+    ))}
+
   </Wrapper>
 );
 export default Menu;

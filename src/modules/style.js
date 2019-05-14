@@ -6,11 +6,10 @@ const App= styled.div`
 	min-height:100vh;
 	display:grid;
 	grid-template-columns: 1fr;
-	grid-template-rows:70px auto auto 50px;
+	grid-template-rows:70px 1fr 50px;
 	grid-template-areas:
 	"header"
 	"main"
-	"slayder"
 	"footer";
 	color:white;
 

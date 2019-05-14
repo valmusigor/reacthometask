@@ -1,19 +1,15 @@
 import React from 'react';
 import Logo from './Logo';
-import Navbar from './Navbar';
+import NavbarContainer from './Navbar/NavbarContainer';
 import Wrapper from './style';
 import AuthItem from './AuthItem';
 
-const Header = (props) => {
-  const data = props;
-  return (
-    <Wrapper>
-      <Logo />
-      <Navbar itemsHeader={data.itemsHeader} />
-      {typeof (localStorage.getItem('auth')) !== 'undefined' && localStorage.getItem('auth') === 'true'
-  && <AuthItem />
-  }
-    </Wrapper>
-  );
-};
+const Header = () => (
+  <Wrapper>
+    <Logo />
+    <NavbarContainer />
+    {typeof (localStorage.getItem('auth')) !== 'undefined' && localStorage.getItem('auth') === 'true'
+      && <AuthItem />}
+  </Wrapper>
+);
 export default Header;

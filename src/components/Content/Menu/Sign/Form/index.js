@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+//import { Route, Redirect } from 'react-router-dom';
 import {
   Wrapper, Field, Btn, Error,
 } from './style';
-import store from '../../../../../redux/state';
 
 const Form = ({
   name,
-  formWorker: {
-    inputLogin,
-    inputPass,
-    inputPassRep,
-    clickAuth,
-  },
+  clickAuth,
+  inputLogin,
+  inputPass,
+  inputPassRep,
   stateSign: {
     valueLogin,
     valuePass,
@@ -21,25 +20,28 @@ const Form = ({
     displayErrorEmail,
     displayErrorPass,
     displayErrorPassRep,
+   // statusAutorize,
   },
 }) => {
   const handleClick = (event) => {
-    event.preventDefault();
-    clickAuth.call(store, (event.target.id == 'btnIn') ? 'signin' : 'signup');
+    // event.preventDefault();
+    clickAuth(event.target.id);
   };
 
   const handleLogin = (event) => {
-    inputLogin.call(store, event.target.value, (event.target.id == 'emailIn') ? 'signin' : 'signup');
+    inputLogin(event.target.value, event.target.id);
   };
 
   const handlePass = (event) => {
-    inputPass.call(store, event.target.value, (event.target.id == 'passIn') ? 'signin' : 'signup');
+    inputPass(event.target.value, event.target.id);
   };
   const handlePassRep = (event) => {
-    inputPassRep.call(store, event.target.value);
+    inputPassRep(event.target.value);
   };
+
+  // if (statusAutorize === 'success') { return (<Redirect to="/Auth" />); }
   return (
-    <form action="/auth" method="GET">
+    <div>
       <Wrapper>
         <label htmlFor="login">email</label>
         <Field
@@ -48,7 +50,7 @@ const Form = ({
           id={(name === 'signin') ? 'emailIn' : 'emailUp'}
           placeholder="enter email"
           value={valueLogin}
-          onInput={handleLogin}
+          onChange={handleLogin}
         />
         <Error display={displayErrorEmail}>Неверно введен email</Error>
       </Wrapper>
@@ -60,7 +62,7 @@ const Form = ({
           id={(name === 'signin') ? 'passIn' : 'passUp'}
           placeholder="enter password"
           value={valuePass}
-          onInput={handlePass}
+          onChange={handlePass}
         />
         <Error display={displayErrorPass}>Неверно введен пароль</Error>
       </Wrapper>
@@ -73,7 +75,7 @@ const Form = ({
             id="passUpRep"
             placeholder="repeat password"
             value={valuePassRep}
-            onInput={handlePassRep}
+            onChange={handlePassRep}
           />
           <Error display={displayErrorPassRep}>Введенные пароли не совпадают</Error>
         </Wrapper>
@@ -88,17 +90,24 @@ const Form = ({
         </Btn>
       </Wrapper>
       <Wrapper />
-    </form>
+    </div>
   );
 };
 Form.propTypes = {
   name: PropTypes.string.isRequired,
-  formWorker: PropTypes.shape({
-    inputLogin: PropTypes.func.isRequired,
-    inputPass: PropTypes.func.isRequired,
-    clickAuth: PropTypes.func.isRequired,
+  inputLogin: PropTypes.func.isRequired,
+  inputPass: PropTypes.func.isRequired,
+  clickAuth: PropTypes.func.isRequired,
+  inputPassRep: PropTypes.func.isRequired,
+  stateSign: PropTypes.shape({
+    valueLogin: PropTypes.string.isRequired,
+    valuePass: PropTypes.string.isRequired,
+    valuePassRep: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    displayErrorEmail: PropTypes.string.isRequired,
+    displayErrorPass: PropTypes.string.isRequired,
+    displayErrorPassRep: PropTypes.string.isRequired,
   }),
-  
 };
 Form.defaultProps = {
   stateSign: {
@@ -111,4 +120,4 @@ Form.defaultProps = {
     displayErrorPassRep: 'none',
   },
 };
-export default Form;
+export default withRouter(Form);
