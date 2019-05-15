@@ -1,18 +1,12 @@
 const FETCH_ERROR = 'fetchErrorCurr';
 const FETCH_LOADING = 'fetchLoadingCurr';
 const FETCH_SUCCESS = 'fetchSuccessAdsCurr';
-const actionFetchErrorCurr = status => ({ type: FETCH_ERROR, status });
-const actionFetchLoadingCurr = status => ({ type: FETCH_LOADING, status });
-const actionFetchSuccessCurr = data => ({ type: FETCH_SUCCESS, data });
+export const CURRENCY_FETCH_REQUEST = 'fetchRequest';
 
-export const actionHeaderInit = () => (dispatch) => {
-  dispatch(actionFetchLoadingCurr('loading'));
-  fetch('https://developerhub.alfabank.by:8273/partner/1.0.0/public/rates')
-    .then(response => response.json())
-    .then((data) => {
-      dispatch(actionFetchSuccessCurr(data));
-    }).catch(() => dispatch(actionFetchErrorCurr('error')));
-};
+export const actionFetchErrorCurr = status => ({ type: FETCH_ERROR, status });
+export const actionFetchLoadingCurr = status => ({ type: FETCH_LOADING, status });
+export const actionFetchSuccessCurr = data => ({ type: FETCH_SUCCESS, data });
+export const actionHeaderInit = () => ({ type: CURRENCY_FETCH_REQUEST });
 
 const initialState = {
   itemsMenu: [

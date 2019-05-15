@@ -6,6 +6,7 @@ const FETCH_ERROR = 'fetchError';
 const FETCH_LOADING = 'fetchLoading';
 const FETCH_SUCCESS = 'fetchSuccess';
 const CLEAR_STATE = 'clearState';
+export const AUTORIZE_FETCH_REQUEST = 'authFetchRequest';
 
 export const actionInputLogin = (login, typeAction) => ({ type: INPUT_LOGIN, login, typeAction });
 export const actionInputPass = (password, typeAction) => ({ type: INPUT_PASSWORD, password, typeAction });
@@ -14,22 +15,12 @@ export const actionFetchError = status => ({ type: FETCH_ERROR, status });
 export const actionFetchLoading = status => ({ type: FETCH_LOADING, status });
 export const actionFetchSuccess = data => ({ type: FETCH_SUCCESS, data });
 export const actionClearState = typeAction => ({ type: CLEAR_STATE, typeAction });
+export const actionClickAuth = typeAction => ({ type: AUTORIZE_FETCH_REQUEST, typeAction });
 
-export const actionClickAuth = type => (dispatch, getState) => {
+/*export const actionClickAuth = type => (dispatch, getState) => {
   dispatch(actionFetchLoading('loading'));
   if (type === 'signin') {
-    fetch('/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body:
-        JSON.stringify({
-          login: getState().dataAutorize.signIn.valueLogin,
-          pass: getState().dataAutorize.signIn.valuePass,
-        }),
-    })
-      .then(res => res.json())
+    
       .then((result) => {
         if (JSON.parse(result).status === 'ok') {
           localStorage.setItem('auth', 'true');
@@ -64,7 +55,7 @@ export const actionClickAuth = type => (dispatch, getState) => {
         dispatch(actionFetchSuccess('success'));
       }).catch(() => dispatch(actionFetchError('error')));
   }
-};
+};*/
 
 export const actionCheckResponse = (typeAction, status) => ({ type: CHECK_RESPONSE, status });
 
@@ -227,7 +218,9 @@ const autorizeReducer = (state = initialState, action) => {
       stateCopy.signIn.statusAutorize = action.data;
       return stateCopy;
     case CLEAR_STATE:
-      if (action.typeAction === 'signin') { stateCopy.signIn = { ...state.signIn }; } else if (action.typeAction === 'signup') { stateCopy.signUp = { ...state.signUp }; }
+      if (action.typeAction === 'signin') {
+        stateCopy.signIn = { ...state.signIn };
+      } else if (action.typeAction === 'signup') { stateCopy.signUp = { ...state.signUp }; }
       setEmptyField(stateCopy, action.typeAction);
       return stateCopy;
     default:
