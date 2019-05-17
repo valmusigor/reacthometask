@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actionSearchAds } from '../../../../redux/reducer/rentalAdsReducer';
+import { actionSearchAds, actionCurrentPage } from '../../../../redux/reducer/rentalAdsReducer';
 import Board from './index';
 
 const mapStateToProps = state => ({
@@ -9,6 +9,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadRentalAds: () => {
     dispatch(actionSearchAds());
+  },
+  chooseCurrentPage: (numberPage) => {
+    dispatch(actionCurrentPage(numberPage));
   },
 });
 

@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
+export const Wrap = styled.div`
+width:80%;
+`;
+
 export const Wrapper = styled.div`
  display:flex;
- width:80%;
+ width:100%;
  justify-content:center;
  flex-wrap:wrap;
 `;
