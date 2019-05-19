@@ -15,48 +15,7 @@ export const actionFetchError = status => ({ type: FETCH_ERROR, status });
 export const actionFetchLoading = status => ({ type: FETCH_LOADING, status });
 export const actionFetchSuccess = data => ({ type: FETCH_SUCCESS, data });
 export const actionClearState = typeAction => ({ type: CLEAR_STATE, typeAction });
-export const actionClickAuth = typeAction => ({ type: AUTORIZE_FETCH_REQUEST, typeAction });
-
-/*export const actionClickAuth = type => (dispatch, getState) => {
-  dispatch(actionFetchLoading('loading'));
-  if (type === 'signin') {
-    
-      .then((result) => {
-        if (JSON.parse(result).status === 'ok') {
-          localStorage.setItem('auth', 'true');
-          localStorage.setItem('id', JSON.parse(result).id);
-        } else {
-          localStorage.setItem('auth', 'false');
-          dispatch(actionClearState('signin'));
-        }
-        dispatch(actionFetchSuccess('success'));
-      }).catch(() => dispatch(actionFetchError('error')));
-  } else if (type === 'signup') {
-    fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body:
-        JSON.stringify({
-          login: getState().dataAutorize.signUp.valueLogin,
-          pass: getState().dataAutorize.signUp.valuePass,
-        }),
-    })
-      .then(res => res.json())
-      .then((result) => {
-        if (JSON.parse(result).status === 'ok') {
-          localStorage.setItem('auth', 'true');
-          localStorage.setItem('id', JSON.parse(result).id);
-        } else {
-          localStorage.setItem('auth', 'false');
-          dispatch(actionClearState('signup'));
-        }
-        dispatch(actionFetchSuccess('success'));
-      }).catch(() => dispatch(actionFetchError('error')));
-  }
-};*/
-
+export const actionClickAuth = (typeAction, history) => ({ type: AUTORIZE_FETCH_REQUEST, typeAction, history });
 export const actionCheckResponse = (typeAction, status) => ({ type: CHECK_RESPONSE, status });
 
 const inputLogin = (elemf, login, type) => {

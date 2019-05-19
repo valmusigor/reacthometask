@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper } from './style';
+import { Wrapper, Selector } from './style';
 
 const SelectorChoose = ({
   itemsSearch: {
@@ -15,9 +15,9 @@ const SelectorChoose = ({
   return (
     <Wrapper>
       <div>{title}</div>
-      <select value={selectedValue} onChange={handleOnchange}>
+      <Selector value={selectedValue} onChange={handleOnchange}>
         {listValue.map(elem => <option key={elem.id} value={elem.value}>{elem.label}</option>)}
-      </select>
+      </Selector>
     </Wrapper>
   );
 };

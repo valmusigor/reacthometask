@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   actionChangePrice, actionChangeCurrency, actionChangeSquare, actionChangeFirm,
   actionChangeAddress, actionChangeFloor,
@@ -37,6 +38,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionSearchAds());
   },
 });
-const SearchFieldContainer = connect(mapStateToProps, mapDispatchToProps)(SearchField);
+const SearchFieldContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchField));
 
 export default SearchFieldContainer;

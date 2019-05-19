@@ -8,8 +8,6 @@ const Header = () => (
   <Wrapper>
     <Logo />
     <NavbarContainer />
-    {typeof (localStorage.getItem('auth')) !== 'undefined' && localStorage.getItem('auth') === 'true'
-      && <AuthItem />}
   </Wrapper>
 );
 export default Header;

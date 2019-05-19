@@ -47,6 +47,7 @@ function* fetchAutorize(action) {
     } else {
       localStorage.setItem('auth', 'false');
     }
+    action.history.push('/auth');
     (action.typeAction === 'signin') ? yield put(actionClearState('signin')) : yield put(actionClearState('signup'));
     yield put(actionFetchSuccess('success'));
   } catch (e) {

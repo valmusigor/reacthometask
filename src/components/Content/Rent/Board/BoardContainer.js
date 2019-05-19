@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { actionSearchAds, actionCurrentPage } from '../../../../redux/reducer/rentalAdsReducer';
 import Board from './index';
 
@@ -15,6 +16,6 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const BoardContainer = connect(mapStateToProps, mapDispatchToProps)(Board);
+const BoardContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Board));
 
 export default BoardContainer;

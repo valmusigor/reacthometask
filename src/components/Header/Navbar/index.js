@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import * as s from './style';
-import imageButton from './images/button_menu.png';
+import AuthItem from '../AuthItem';
+
 
 class Navbar extends Component{
   
@@ -25,15 +26,16 @@ class Navbar extends Component{
         <s.List visibly={this.state.dispay}>
         {this.props.itemsHeader.itemsMenu.map(item => <s.Item key={item.id} ><s.Linki to={item.path} exact activeStyle={{
       textDecoration: 'none',
-      color: 'black'
+      color: 'red'
     }}>{item.name}</s.Linki></s.Item>)}
           <s.Item>EURO {this.props.itemsHeader.exchangeRates.soldEuro}/{this.props.itemsHeader.exchangeRates.buyEuro}</s.Item>
           <s.Item>USD {this.props.itemsHeader.exchangeRates.soldUsd}/{this.props.itemsHeader.exchangeRates.buyUsd}</s.Item>
           <s.Item>RUB {this.props.itemsHeader.exchangeRates.soldRub}/{this.props.itemsHeader.exchangeRates.buyRub}</s.Item>
           </s.List>
-          
-          <s.BtnMenu onClick = {this.handleclick}><img src={imageButton} /></s.BtnMenu>
+          <s.BtnMenu onClick = {this.handleclick}></s.BtnMenu>
       </s.Wrapper>
+      {typeof (localStorage.getItem('auth')) !== 'undefined' && localStorage.getItem('auth') === 'true'
+      && <AuthItem />}
     </BrowserRouter>
   );
   }

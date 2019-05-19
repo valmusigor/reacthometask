@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { actionHeaderInit } from '../../../redux/reducer/headerReducer';
 import Navbar from './index';
 
@@ -9,6 +10,6 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
+const NavbarContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
 
 export default NavbarContainer;

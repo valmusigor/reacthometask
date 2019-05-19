@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   actionInputLogin, actionInputPass, actionInputPassRep, actionClickAuth,
 } from '../../../redux/reducer/autorizeReducer';
@@ -11,8 +12,8 @@ const mapStateToProps = state => ({
 }
 );
 const mapDispatchToProps = dispatch => ({
-  clickAuth: (id) => {
-    dispatch(actionClickAuth((id === 'btnIn') ? 'signin' : 'signup'));
+  clickAuth: (id, history) => {
+    dispatch(actionClickAuth((id === 'btnIn') ? 'signin' : 'signup', history));
   },
   inputLogin: (value, id) => {
     dispatch(actionInputLogin(value, (id === 'emailIn') ? 'signin' : 'signup'));
@@ -25,6 +26,6 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const MenuContainer = connect(mapStateToProps, mapDispatchToProps)(Menu);
+const MenuContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Menu));
 
 export default MenuContainer;

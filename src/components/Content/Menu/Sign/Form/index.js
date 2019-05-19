@@ -18,13 +18,13 @@ const Form = ({
     disabled,
     displayErrorEmail,
     displayErrorPass,
-    displayErrorPassRep,
-   // statusAutorize,
+    displayErrorPassRep, // statusAutorize,
   },
+  ...ownProps,
 }) => {
   const handleClick = (event) => {
     // event.preventDefault();
-    clickAuth(event.target.id);
+    clickAuth(event.target.id, ownProps.history);
   };
 
   const handleLogin = (event) => {
