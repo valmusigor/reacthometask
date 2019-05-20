@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AuthOk from '../../components/Content/AuthOk';
+import Cabinet from '../../components/Content/Cabinet';
 import MenuContainer from '../../components/Content/Menu/MenuContainer';
 import Rent from '../../components/Content/Rent';
 import Header from '../../components/Header';
@@ -21,16 +21,16 @@ const App = () => (
             ? <MenuContainer />
             : (localStorage.getItem('auth') === 'false')
               ? <MenuContainer />
-              : <AuthOk />)}
+              : <Cabinet />)}
         />
         <Route
           exact
           path="/login"
           render={() => (localStorage.getItem('auth') === 'false'
             ? <MenuContainer />
-            : <AuthOk />)}
+            : <Cabinet />)}
         />
-        <PrivateRoute exact path="/auth" component={AuthOk} />
+        <PrivateRoute exact path="/auth" component={Cabinet} />
         <Route exact path="/rent" render={() => <Rent />} />
       </Switch>
       <Footer />

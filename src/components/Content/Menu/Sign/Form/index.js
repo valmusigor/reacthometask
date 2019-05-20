@@ -18,7 +18,8 @@ const Form = ({
     disabled,
     displayErrorEmail,
     displayErrorPass,
-    displayErrorPassRep, // statusAutorize,
+    displayErrorPassRep,
+    statusAutorize,
   },
   ...ownProps,
 }) => {
@@ -37,7 +38,7 @@ const Form = ({
   const handlePassRep = (event) => {
     inputPassRep(event.target.value);
   };
-
+  
   // if (statusAutorize === 'success') { return (<Redirect to="/Auth" />); }
   return (
     <div>
@@ -51,7 +52,7 @@ const Form = ({
           value={valueLogin}
           onChange={handleLogin}
         />
-        <Error display={displayErrorEmail}>Неверно введен email</Error>
+        <Error display={displayErrorEmail}>{(name === 'signup' && statusAutorize ==='exist')?'Email существует':'Неверно введен email'}</Error>
       </Wrapper>
       <Wrapper>
         <label htmlFor="pass1">password</label>
@@ -92,22 +93,7 @@ const Form = ({
     </div>
   );
 };
-Form.propTypes = {
-  name: PropTypes.string.isRequired,
-  inputLogin: PropTypes.func.isRequired,
-  inputPass: PropTypes.func.isRequired,
-  clickAuth: PropTypes.func.isRequired,
-  inputPassRep: PropTypes.func.isRequired,
-  stateSign: PropTypes.shape({
-    valueLogin: PropTypes.string.isRequired,
-    valuePass: PropTypes.string.isRequired,
-    valuePassRep: PropTypes.string.isRequired,
-    disabled: PropTypes.bool.isRequired,
-    displayErrorEmail: PropTypes.string.isRequired,
-    displayErrorPass: PropTypes.string.isRequired,
-    displayErrorPassRep: PropTypes.string.isRequired,
-  }),
-};
+
 Form.defaultProps = {
   stateSign: {
     valueLogin: '',
@@ -118,5 +104,21 @@ Form.defaultProps = {
     displayErrorPass: 'none',
     displayErrorPassRep: 'none',
   },
+};
+Form.propTypes = {
+  name: PropTypes.string.isRequired,
+  inputLogin: PropTypes.func.isRequired,
+  inputPass: PropTypes.func.isRequired,
+  clickAuth: PropTypes.func.isRequired,
+  inputPassRep: PropTypes.func.isRequired,
+  stateSign: PropTypes.shape({
+    valueLogin: PropTypes.string.isRequired,
+    valuePass: PropTypes.string.isRequired,
+    valuePassRep: PropTypes.any.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    displayErrorEmail: PropTypes.string.isRequired,
+    displayErrorPass: PropTypes.string.isRequired,
+    displayErrorPassRep: PropTypes.string.isRequired,
+  }),
 };
 export default withRouter(Form);

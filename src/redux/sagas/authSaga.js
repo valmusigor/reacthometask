@@ -12,7 +12,7 @@ const getSign = state => state.dataAutorize;
 function* fetchAutorize(action) {
   let result;
   const dataForm = yield select(getSign);
-  yield put(actionFetchLoading('loading'));
+  yield put(actionFetchLoading('loading', action.typeAction));
   try {
     if (action.typeAction === 'signin') {
       result = yield call(() => fetch('/signin', {
@@ -41,17 +41,17 @@ function* fetchAutorize(action) {
       })
         .then(res => res.json()));
     }
+    (action.typeAction === 'signin') ? yield put(actionClearState('signin')) : yield put(actionClearState('signup'));
     if (JSON.parse(result).status === 'ok') {
       localStorage.setItem('auth', 'true');
       localStorage.setItem('id', JSON.parse(result).id);
-    } else {
-      localStorage.setItem('auth', 'false');
-    }
+      yield put(actionFetchSuccess('success', action.typeAction));
+    } else if (JSON.parse(result).status === 'exist') {
+      yield put(actionFetchSuccess('exist', action.typeAction));
+    } else { yield put(actionFetchSuccess('success', action.typeAction)); }
     action.history.push('/auth');
-    (action.typeAction === 'signin') ? yield put(actionClearState('signin')) : yield put(actionClearState('signup'));
-    yield put(actionFetchSuccess('success'));
   } catch (e) {
-    yield put(actionFetchError('error'));
+    yield put(actionFetchError('error'), action.typeAction);
   }
 }
 

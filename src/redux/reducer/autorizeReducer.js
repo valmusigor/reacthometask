@@ -11,9 +11,9 @@ export const AUTORIZE_FETCH_REQUEST = 'authFetchRequest';
 export const actionInputLogin = (login, typeAction) => ({ type: INPUT_LOGIN, login, typeAction });
 export const actionInputPass = (password, typeAction) => ({ type: INPUT_PASSWORD, password, typeAction });
 export const actionInputPassRep = password => ({ type: REPEAT_PASSWORD, password });
-export const actionFetchError = status => ({ type: FETCH_ERROR, status });
-export const actionFetchLoading = status => ({ type: FETCH_LOADING, status });
-export const actionFetchSuccess = data => ({ type: FETCH_SUCCESS, data });
+export const actionFetchError = (status, typeAction) => ({ type: FETCH_ERROR, status, typeAction });
+export const actionFetchLoading = (status, typeAction) => ({ type: FETCH_LOADING, status, typeAction });
+export const actionFetchSuccess = (status, typeAction) => ({ type: FETCH_LOADING, status, typeAction });
 export const actionClearState = typeAction => ({ type: CLEAR_STATE, typeAction });
 export const actionClickAuth = (typeAction, history) => ({ type: AUTORIZE_FETCH_REQUEST, typeAction, history });
 export const actionCheckResponse = (typeAction, status) => ({ type: CHECK_RESPONSE, status });
@@ -165,16 +165,31 @@ const autorizeReducer = (state = initialState, action) => {
       stateCopy.signUp = inputPassRep(stateCopy.signUp, action.password);
       return stateCopy;
     case FETCH_ERROR:
-      stateCopy.signIn = { ...state.signIn };
-      stateCopy.signIn.statusAutorize = action.status;
+      if (action.typeAction === 'signin') {
+        stateCopy.signIn = { ...state.signIn };
+        stateCopy.signIn.statusAutorize = action.status;
+      } else {
+        stateCopy.signUp = { ...state.signUp };
+        stateCopy.signUp.statusAutorize = action.status;
+      }
       return stateCopy;
     case FETCH_LOADING:
-      stateCopy.signIn = { ...state.signIn };
-      stateCopy.signIn.statusAutorize = action.status;
+      if (action.typeAction === 'signin') {
+        stateCopy.signIn = { ...state.signIn };
+        stateCopy.signIn.statusAutorize = action.status;
+      } else {
+        stateCopy.signUp = { ...state.signUp };
+        stateCopy.signUp.statusAutorize = action.status;
+      }
       return stateCopy;
     case FETCH_SUCCESS:
-      stateCopy.signIn = { ...state.signIn };
-      stateCopy.signIn.statusAutorize = action.data;
+      if (action.typeAction === 'signin') {
+        stateCopy.signIn = { ...state.signIn };
+        stateCopy.signIn.statusAutorize = action.status;
+      } else {
+        stateCopy.signUp = { ...state.signUp };
+        stateCopy.signUp.statusAutorize = action.status;
+      }
       return stateCopy;
     case CLEAR_STATE:
       if (action.typeAction === 'signin') {
