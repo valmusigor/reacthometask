@@ -16,15 +16,6 @@ const App = () => (
       <Switch>
         <Route
           exact
-          path="/"
-          render={() => ((typeof (localStorage.getItem('auth')) === 'undefined')
-            ? <MenuContainer />
-            : (localStorage.getItem('auth') === 'false')
-              ? <MenuContainer />
-              : <Cabinet />)}
-        />
-        <Route
-          exact
           path="/login"
           render={() => (localStorage.getItem('auth') === 'false'
             ? <MenuContainer />
@@ -32,6 +23,14 @@ const App = () => (
         />
         <PrivateRoute exact path="/auth" component={Cabinet} />
         <Route exact path="/rent" render={() => <Rent />} />
+        <Route
+          path="/"
+          render={() => ((typeof (localStorage.getItem('auth')) === 'undefined')
+            ? <MenuContainer />
+            : (localStorage.getItem('auth') === 'false')
+              ? <MenuContainer />
+              : <Cabinet />)}
+        />
       </Switch>
       <Footer />
     </Container>

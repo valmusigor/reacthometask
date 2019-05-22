@@ -44,7 +44,7 @@ function* fetchAutorize(action) {
     (action.typeAction === 'signin') ? yield put(actionClearState('signin')) : yield put(actionClearState('signup'));
     if (JSON.parse(result).status === 'ok') {
       localStorage.setItem('auth', 'true');
-      localStorage.setItem('id', JSON.parse(result).id);
+      localStorage.setItem('token', JSON.parse(result).token);
       yield put(actionFetchSuccess('success', action.typeAction));
     } else if (JSON.parse(result).status === 'exist') {
       yield put(actionFetchSuccess('exist', action.typeAction));
