@@ -16,6 +16,6 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const BoardContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Board));
+const BoardContainer = connect(mapStateToProps, mapDispatchToProps)(withRouter(Board));
 
 export default BoardContainer;

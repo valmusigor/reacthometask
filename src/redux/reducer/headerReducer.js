@@ -13,7 +13,7 @@ const initialState = {
     { id: 0, path: '/', name: 'Главная' },
     { id: 1, path: '/rent', name: 'Аренда' },
     { id: 2, path: '/friends', name: 'Лучшие друзья' },
-    { id: 3, path: '#', name: 'Контакты' },
+    { id: 3, path: '/contacts', name: 'Контакты' },
   ],
   exchangeRates: {
     dispay: 0,

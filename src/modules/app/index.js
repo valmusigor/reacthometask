@@ -7,22 +7,22 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PrivateRoute from '../routes/PrivateRoute';
 import Container from '../style';
-
+import Friends from '../../components/Friends';
 
 const App = () => (
   <BrowserRouter>
     <Container>
       <Header />
       <Switch>
+        <PrivateRoute exact path="/auth" component={Cabinet} />
+        <Route path="/friends" /*render={() => <Rent />} */ component ={Friends}/>
+        <Route path="/rent/:id?" /*render={() => <Rent />} */ component ={Rent}/>
         <Route
-          exact
           path="/login"
           render={() => (localStorage.getItem('auth') === 'false'
             ? <MenuContainer />
             : <Cabinet />)}
         />
-        <PrivateRoute exact path="/auth" component={Cabinet} />
-        <Route exact path="/rent" render={() => <Rent />} />
         <Route
           path="/"
           render={() => ((typeof (localStorage.getItem('auth')) === 'undefined')

@@ -6,6 +6,8 @@ import {
 import CabinetRent from './CabinetRent';
 import CabinetMenu from './CabinetMenu';
 import CabinetUserContainer from './CabinetUser/CabinetUserContainer';
+import UserEditContainer from './CabinetUser/UserEdit/UserEditContainer';
+import UserEdit from './CabinetUser/UserEdit';
 
 const Cabinet = () => (
   <BrowserRouter>
@@ -13,6 +15,7 @@ const Cabinet = () => (
       <SidebarL>
         <Switch>
           <Route path="/cabinet/rent" render={() => <CabinetRent />} />
+          <Route path="/cabinet/user/edit" render={() => <UserEditContainer />} />
           <Route path="/cabinet/user" render={() => <CabinetUserContainer />} />
         </Switch>
       </SidebarL>

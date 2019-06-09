@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
 display:flex;
@@ -26,4 +27,8 @@ display:flex;
 export const Label = styled.span`
 margin-right:10px;
 color:white;
+`;
+
+export const LinkEdit = styled(NavLink)`
+color:#007bff;
 `;

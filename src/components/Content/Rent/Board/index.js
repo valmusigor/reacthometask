@@ -7,6 +7,8 @@ import Paginator from './Paginator';
 class Board extends Component {
   componentDidMount() {
     this.props.loadRentalAds();
+    if(this.props.match.params.id)
+    console.log(this.props.match.params.id);
   }
 
   render() {
@@ -28,10 +30,10 @@ class Board extends Component {
           ))}
         </Wrapper>
         <Paginator
-        currentPage={this.props.itemsRentalAds.currentPage} 
-        totalPageSize={this.props.itemsRentalAds.totalPageSize} 
-        loadRentalAds={this.props.loadRentalAds} 
-        chooseCurrentPage={this.props.chooseCurrentPage}
+          currentPage={this.props.itemsRentalAds.currentPage}
+          totalPageSize={this.props.itemsRentalAds.totalPageSize}
+          loadRentalAds={this.props.loadRentalAds}
+          chooseCurrentPage={this.props.chooseCurrentPage}
         />
       </Wrap>
     );
